@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import * as qs from 'qs';
+import qs from 'qs';
 import { TransferoAuthResponse } from './types';
 
 export class AuthAPI {
