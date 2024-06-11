@@ -1,6 +1,8 @@
-
-export default {
-  languageOptions: {
-    // parser: typescriptParser,
-  },
-};
+module.exports = [
+  {
+      rules: {
+          semi: "error",
+          "prefer-const": "error"
+      }
+  }
+];
