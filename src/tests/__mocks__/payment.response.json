@@ -1,0 +1,23 @@
+{
+    "paymentId": "754bd72a-3b72-4c3a-a511-315ca44ed151",
+    "amount": 1500,
+    "amountNet": 0,
+    "externalId": "12345",
+    "currency": "BRL",
+    "name": "Joao Bruno",
+    "taxId": "11140053809",
+    "taxIdCountry": 76,
+    "bankAccount": "15400901",
+    "bankBranch": "1547",
+    "bankCode": "024",
+    "cbuCvu": null,
+    "pixKey": null,
+    "alias": null,
+    "paymentStatus": "CompletedWithSuccess",
+    "transactionId": "b8c5eae3-5a2b-42d7-937d-9523a29484e0",
+    "transactionIdFromPaymentReversal": null,
+    "reasonsForPaymentRejection": null,
+    "wallet": null,
+    "tag": null,
+    "blockchain": 0
+  }

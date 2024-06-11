@@ -1,0 +1,20 @@
+{
+    "paymentGroupId": "6a08ae9f-2e88-408d-b95d-85e6dad6389e",
+    "totalAmount": 370,
+    "totalAmountPaymentsCompletedWithSuccess": 0,
+    "numberOfPayments": 1,
+    "numberOfPaymentsPending": 1,
+    "numberOfPaymentsProcessing": 0,
+    "numberOfPaymentsCompletedWithSuccess": 0,
+    "numberOfPaymentsCompletedWithError": 0,
+    "createdAt": "2020-05-14",
+    "payments": [{
+        "paymentId": "754bd72a-3b72-4c3a-a511-315ca44ed151",
+        "amount": 370,
+        "currency": "BRL",
+        "name": "Maria Oliveira",
+        "taxIdCountry": 76,
+        "taxId": "85517053009",
+        "pixKey": "maria_oliveira@gmail.com"
+    }]
+}

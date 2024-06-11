@@ -1,0 +1,21 @@
+{
+    "id": "00020101021226890014br.gov.bcb.pix2567brcode-h.sandbox.starkinfra.com/v2/46c9d42b655647a19d64e09a512d0aad5204000053039865802BR59253Rz Servicos Digitais Ltd6014Rio de Janeiro62070503***630473A8",
+    "type": "brcode-payment",
+    "status": "paid",
+    "name": "3Rz Servicos Digitais Ltda",
+    "taxId": "",
+    "amount": 11.01,
+    "interestAmount": 0,
+    "fineAmount": 0,
+    "discountAmount": 0,
+    "brCode": {
+      "bankCode": "20018183",
+      "accountType": "payment",
+      "reconciliationId": "i46c9d42b655647a19d64e09a512d0aad",
+      "description": "",
+      "keyId": "b4f231da-59c3-4687-bb3a-29e052913d51",
+      "nominalAmount": 11.01,
+      "reductionAmount": 0
+    },
+    "scheduled": null
+  }
