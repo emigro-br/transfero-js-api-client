@@ -1,5 +1,5 @@
 {
-  "name": "transfero-js-api-client",
+  "name": "@EmigroBR/transfero-js-api-client",
   "version": "0.1.0",
   "description": "Transfero JS Client API",
   "main": "dist/index.js",
@@ -14,7 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/EmigroBR/transfero-js-api-client.git"
+    "url": "git+https://github.com/EmigroBR/transfero-js-api-client.git"
+  },
+  "publishConfig": {
+    "@EmigroBR:registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "transfero"
