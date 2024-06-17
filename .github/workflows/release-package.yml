@@ -25,12 +25,6 @@ jobs:
       
       - run: npm ci
 
-      # workaround for permisions
-      # - name: Authenticate with the GitHub Package Registry
-      #   run:
-      #     echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" >
-      #     ~/.npmrc
-
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
