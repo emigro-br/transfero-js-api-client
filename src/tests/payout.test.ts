@@ -8,9 +8,9 @@ import pixPayoutJson from '@/mocks/payout.brazil-pix.json';
 import bankPayoutJson from '@/mocks/payout.brazil-bank.json';
 import cryptoPayoutJson from '@/mocks/payout.crypto.json';
 import {
-  TransferoBankAccountPaymentRequest,
+  TransferoBrazilBankTransferRequest,
   TransferoCryptoPaymentRequest,
-  TransferoPixPaymentRequest,
+  TransferoPixTransferRequest,
 } from '@/client/types';
 
 describe('PayoutAPI', () => {
@@ -18,8 +18,8 @@ describe('PayoutAPI', () => {
   let payoutAPI: PayoutAPI;
   let mock: any;
   const accountId = 'your-account-id';
-  const pixPayout = pixPayoutJson as TransferoPixPaymentRequest;
-  const bankPayout = bankPayoutJson as TransferoBankAccountPaymentRequest;
+  const pixPayout = pixPayoutJson as TransferoPixTransferRequest;
+  const bankPayout = bankPayoutJson as TransferoBrazilBankTransferRequest;
   const cryptoPayout = cryptoPayoutJson as TransferoCryptoPaymentRequest;
 
   beforeEach(() => {

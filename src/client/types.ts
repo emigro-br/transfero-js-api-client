@@ -42,8 +42,8 @@ export type TransferoPaymentPreview = {
 
 // Payout
 type TransferoPaymentRequest = {
-  id?: string;
   amount: number;
+  externalId?: string;
   currency: TransferoCurrency;
   name: string;
   taxIdCountry: TransferoTaxIdCountry;
@@ -51,13 +51,17 @@ type TransferoPaymentRequest = {
 };
 
 // Brazil - transfer using a Pix key
-export type TransferoPixPaymentRequest = TransferoPaymentRequest & {
+export type TransferoPixTransferRequest = TransferoPaymentRequest & {
   pixKey: string;
-  QrCode?: string;
+};
+
+// Brazil - pyament using a Pix brcode
+export type TransferoBrCodePaymentRequest = TransferoPaymentRequest & {
+  QrCode: string;
 };
 
 // Brazil - transfer using account info
-export type TransferoBankAccountPaymentRequest = TransferoPaymentRequest & {
+export type TransferoBrazilBankTransferRequest = TransferoPaymentRequest & {
   bankAccount: string;
   bankBranch: string;
   bankCode: string;
@@ -68,11 +72,13 @@ export type TransferoCryptoPaymentRequest = TransferoPaymentRequest & {
   wallet: string;
   tag?: string | null;
   blockchain: string;
+  blockchainFeeId?: string;
 };
 
 export type TransferoPaymentGroupRequest = (
-  | TransferoPixPaymentRequest
-  | TransferoBankAccountPaymentRequest
+  | TransferoPixTransferRequest
+  | TransferoBrCodePaymentRequest
+  | TransferoBrazilBankTransferRequest
   | TransferoCryptoPaymentRequest
 )[];
 
