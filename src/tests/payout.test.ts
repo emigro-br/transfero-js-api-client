@@ -4,14 +4,23 @@ import { PayoutAPI } from '../client/payout';
 
 import paymentPreviewResponse from '@/mocks/paymentpreview.response.json';
 import paymentGroupResponse from '@/mocks/paymentgroup.response.json';
-import pixPayout from '@/mocks/payout-pix.json';
-import { TransferoPixPayout } from '@/client/types';
+import pixPayoutJson from '@/mocks/payout.brazil-pix.json';
+import bankPayoutJson from '@/mocks/payout.brazil-bank.json';
+import cryptoPayoutJson from '@/mocks/payout.crypto.json';
+import {
+  TransferoBankAccountPaymentRequest,
+  TransferoCryptoPaymentRequest,
+  TransferoPixPaymentRequest,
+} from '@/client/types';
 
 describe('PayoutAPI', () => {
   let apiClient: AxiosInstance;
   let payoutAPI: PayoutAPI;
   let mock: any;
   const accountId = 'your-account-id';
+  const pixPayout = pixPayoutJson as TransferoPixPaymentRequest;
+  const bankPayout = bankPayoutJson as TransferoBankAccountPaymentRequest;
+  const cryptoPayout = cryptoPayoutJson as TransferoCryptoPaymentRequest;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -42,7 +51,7 @@ describe('PayoutAPI', () => {
 
   describe('createPaymentGroup', () => {
     it('should make a POST request to /accounts/{accountId}/paymentgroup with the correct data', async () => {
-      const data = [pixPayout as TransferoPixPayout];
+      const data = [pixPayout, bankPayout, cryptoPayout];
       const responseData = paymentGroupResponse;
       mock
         .onPost(`/accounts/${accountId}/paymentgroup`)
