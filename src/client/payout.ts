@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import {
-  TransferoPaymentGroupRequest,
+  TransferoPaymentRequest,
   TransferoPaymentGroupResponse,
   TransferoPaymentPreview,
 } from './types';
@@ -26,7 +26,7 @@ export class PayoutAPI {
 
   // POST https://openbanking.bit.one/api/v{version}/accounts/{accountId}/paymentgroup
   async createPaymentGroup(
-    data: TransferoPaymentGroupRequest,
+    data: TransferoPaymentRequest,
   ): Promise<TransferoPaymentGroupResponse> {
     const response = await this.apiClient.post(
       `/accounts/${this.accountId}/paymentgroup`,

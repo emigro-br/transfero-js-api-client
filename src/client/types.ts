@@ -41,7 +41,7 @@ export type TransferoPaymentPreview = {
 };
 
 // Payout
-type TransferoPaymentRequest = {
+type TransferoPaymentRequestBase = {
   amount: number;
   externalId?: string;
   currency: TransferoCurrency;
@@ -51,36 +51,60 @@ type TransferoPaymentRequest = {
 };
 
 // Brazil - transfer using a Pix key
-export type TransferoPixTransferRequest = TransferoPaymentRequest & {
+export type TransferoPixTransferRequest = TransferoPaymentRequestBase & {
   pixKey: string;
 };
 
 // Brazil - pyament using a Pix brcode
-export type TransferoBrCodePaymentRequest = TransferoPaymentRequest & {
+export type TransferoBrCodePaymentRequest = TransferoPaymentRequestBase & {
   QrCode: string;
 };
 
 // Brazil - transfer using account info
-export type TransferoBrazilBankTransferRequest = TransferoPaymentRequest & {
+export type TransferoBrazilBankTransferRequest = TransferoPaymentRequestBase & {
   bankAccount: string;
   bankBranch: string;
   bankCode: string;
 };
 
 // Crypto payout
-export type TransferoCryptoPaymentRequest = TransferoPaymentRequest & {
+export type TransferoCryptoPaymentRequest = TransferoPaymentRequestBase & {
   wallet: string;
   tag?: string | null;
   blockchain: string;
   blockchainFeeId?: string;
 };
 
-export type TransferoPaymentGroupRequest = (
+export type TransferoPaymentRequest = (
   | TransferoPixTransferRequest
   | TransferoBrCodePaymentRequest
   | TransferoBrazilBankTransferRequest
   | TransferoCryptoPaymentRequest
 )[];
+
+export type TransferoPaymentResponseBase = {
+  paymentId: string;
+  amountNet?: number;
+  paymentStatus: TransferoPaymentStatus;
+  transactionId: string | null;
+  transactionIdFromPaymentReversal: string | null;
+  reasonsForPaymentRejection: string | null;
+};
+
+export type TransferoPixTransferResponse = TransferoPaymentResponseBase &
+  TransferoPixTransferRequest;
+export type TransferoBrCodePaymentResponse = TransferoPaymentResponseBase &
+  TransferoBrCodePaymentRequest;
+export type TransferoBrazilBankTransferResponse = TransferoPaymentResponseBase &
+  TransferoBrazilBankTransferRequest;
+export type TransferoCryptoPaymentResponse = TransferoPaymentResponseBase &
+  TransferoCryptoPaymentRequest;
+
+export type TransferoPaymentResponse =
+  | TransferoPixTransferResponse
+  | TransferoBrCodePaymentResponse
+  | TransferoBrazilBankTransferResponse
+  | TransferoCryptoPaymentResponse;
 
 export type TransferoPaymentGroupResponse = {
   paymentGroupId: string;
@@ -93,30 +117,6 @@ export type TransferoPaymentGroupResponse = {
   numberOfPaymentsCompletedWithError: number;
   createdAt: string;
   payments: TransferoPaymentResponse[];
-};
-
-export type TransferoPaymentResponse = {
-  paymentId: string;
-  amount: number;
-  amountNet: number;
-  externalId: string;
-  currency: string;
-  name: string;
-  taxId: string;
-  taxIdCountry: TransferoTaxIdCountry;
-  bankAccount: string;
-  bankBranch: string;
-  bankCode: string;
-  cbuCvu: string | null;
-  pixKey: string | null;
-  alias: string | null;
-  paymentStatus: TransferoPaymentStatus;
-  transactionId: string;
-  transactionIdFromPaymentReversal: string | null;
-  reasonsForPaymentRejection: string | null;
-  wallet: string | null;
-  tag: string | null;
-  blockchain: number;
 };
 
 /*
