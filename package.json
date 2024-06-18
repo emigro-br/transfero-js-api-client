@@ -1,6 +1,6 @@
 {
   "name": "@EmigroBR/transfero-js-api-client",
-  "version": "0.1.1",
+  "version": "0.2.0-alpha",
   "description": "Transfero JS Client API",
   "main": "dist/index.js",
   "files": [
