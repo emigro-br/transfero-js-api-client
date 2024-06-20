@@ -1,5 +1,5 @@
 {
-  "name": "@EmigroBR/transfero-js-api-client",
+  "name": "@emigro-br/transfero-js-api-client",
   "version": "0.2.0-alpha",
   "description": "Transfero JS Client API",
   "main": "dist/index.js",
@@ -15,10 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EmigroBR/transfero-js-api-client.git"
+    "url": "git+https://github.com/emigro-br/transfero-js-api-client.git"
   },
   "publishConfig": {
-    "@EmigroBR:registry": "https://npm.pkg.github.com"
+    "@emigro-br:registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "transfero"
@@ -26,9 +26,9 @@
   "author": "Emigro Inc.",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EmigroBR/transfero-js-api-client/issues"
+    "url": "https://github.com/emigro-br/transfero-js-api-client/issues"
   },
-  "homepage": "https://github.com/EmigroBR/transfero-js-api-client#readme",
+  "homepage": "https://github.com/emigro-br/transfero-js-api-client#readme",
   "lint-staged": {
     "src/**/*.ts": [
       "npm run format"
