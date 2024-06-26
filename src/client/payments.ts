@@ -6,7 +6,7 @@ import {
   PaymentQueryParams,
 } from './types';
 
-export class PayoutAPI {
+export class PaymentsAPI {
   private readonly accountId: string;
   private readonly apiClient: AxiosInstance;
 

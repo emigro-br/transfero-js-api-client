@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { PayoutAPI } from '../client/payout';
+import { PaymentsAPI } from '../client/payments';
 
 import paymentPreviewResponse from '@/mocks/paymentpreview.response.json';
 import paymentGroupResponse from '@/mocks/paymentgroup.response.json';
@@ -16,7 +16,7 @@ import {
 
 describe('PayoutAPI', () => {
   let apiClient: AxiosInstance;
-  let payoutAPI: PayoutAPI;
+  let paymentsApi: PaymentsAPI;
   let mock: any;
   const accountId = 'your-account-id';
   const pixPayout = pixPayoutJson as TransferoPixTransferRequest;
@@ -26,7 +26,7 @@ describe('PayoutAPI', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     apiClient = axios.create();
-    payoutAPI = new PayoutAPI(apiClient, accountId);
+    paymentsApi = new PaymentsAPI(apiClient, accountId);
     mock = new MockAdapter(apiClient, { onNoMatch: 'throwException' });
   });
 
@@ -40,7 +40,7 @@ describe('PayoutAPI', () => {
         .reply(200, responseData);
 
       const mockAxiosPost = jest.spyOn(apiClient, 'post');
-      const result = await payoutAPI.paymentPreview(brcode);
+      const result = await paymentsApi.paymentPreview(brcode);
 
       expect(mockAxiosPost).toHaveBeenCalledWith(
         `/accounts/${accountId}/paymentpreview`,
@@ -59,7 +59,7 @@ describe('PayoutAPI', () => {
         .reply(200, responseData);
 
       const mockAxiosPost = jest.spyOn(apiClient, 'post');
-      const result = await payoutAPI.createPaymentGroup(data);
+      const result = await paymentsApi.createPaymentGroup(data);
 
       expect(mockAxiosPost).toHaveBeenCalledWith(
         `/accounts/${accountId}/paymentgroup`,
@@ -81,7 +81,7 @@ describe('PayoutAPI', () => {
         .reply(200, responseData);
 
       const mockAxiosGet = jest.spyOn(apiClient, 'get');
-      const result = await payoutAPI.getPaymentGroup(
+      const result = await paymentsApi.getPaymentGroup(
         paymentGroupId,
         paymentId,
         externalId,
@@ -108,7 +108,7 @@ describe('PayoutAPI', () => {
         .onGet(`/accounts/${accountId}/payments`, { params: queryParams })
         .reply(200, responseData);
       const mockAxiosGet = jest.spyOn(apiClient, 'get');
-      const result = await payoutAPI.listPayments(queryParams);
+      const result = await paymentsApi.listPayments(queryParams);
       expect(mockAxiosGet).toHaveBeenCalledWith(
         `/accounts/${accountId}/payments`,
         { params: queryParams },

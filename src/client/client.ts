@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { AuthAPI } from './auth';
-import { PayoutAPI } from './payout';
+import { PaymentsAPI } from './payments';
 
 export type TransferoConfig = {
   clientId: string;
@@ -75,7 +75,7 @@ export class TransferoClient {
     }
   }
 
-  payout(accountId: string): PayoutAPI {
-    return new PayoutAPI(this.apiClient, accountId);
+  payments(accountId: string): PaymentsAPI {
+    return new PaymentsAPI(this.apiClient, accountId);
   }
 }

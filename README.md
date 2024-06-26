@@ -29,7 +29,7 @@ You can now use the client instance to interact with the Transfero API.
 The Transfero JS Client API provides the following classes:
 
 * AuthAPI: Handles authentication with the Transfero API.
-* PayoutAPI: Handles payouts via the Transfero API.
+* PaymentsAPI: Handles payouts via the Transfero API.
 
 ### Building
 
