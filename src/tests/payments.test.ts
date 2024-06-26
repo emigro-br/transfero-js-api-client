@@ -2,11 +2,11 @@ import axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { PaymentsAPI } from '../client/payments';
 
-import paymentPreviewResponse from '@/mocks/paymentpreview.response.json';
-import paymentGroupResponse from '@/mocks/paymentgroup.response.json';
-import pixPayoutJson from '@/mocks/payout.brazil-pix.json';
-import bankPayoutJson from '@/mocks/payout.brazil-bank.json';
-import cryptoPayoutJson from '@/mocks/payout.crypto.json';
+import paymentPreviewResponse from '@/mocks/payments/paymentpreview.response.json';
+import paymentGroupResponse from '@/mocks/payments/paymentgroup.response.json';
+import pixPayoutJson from '@/mocks/payments/payout.brazil-pix.json';
+import bankPayoutJson from '@/mocks/payments/payout.brazil-bank.json';
+import cryptoPayoutJson from '@/mocks/payments/payout.crypto.json';
 import {
   PaymentQueryParams,
   TransferoBrazilBankTransferRequest,

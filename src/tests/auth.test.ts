@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { AuthAPI, authUrl } from '../client/auth';
 
+import authJson from '@/mocks/auth/token.response.json';
+
 describe('AuthAPI', () => {
   let apiClient: AxiosInstance;
   let authAPI: AuthAPI;
@@ -28,10 +30,7 @@ describe('AuthAPI', () => {
         },
       };
 
-      const responseData = {
-        token_type: 'Bearer',
-        access_token: 'your-access-token',
-      };
+      const responseData = authJson;
       mock.onPost(authUrl).reply(200, responseData);
 
       const mockAxiosPost = jest.spyOn(apiClient, 'post');
