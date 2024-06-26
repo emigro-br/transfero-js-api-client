@@ -8,6 +8,7 @@ import pixPayoutJson from '@/mocks/payout.brazil-pix.json';
 import bankPayoutJson from '@/mocks/payout.brazil-bank.json';
 import cryptoPayoutJson from '@/mocks/payout.crypto.json';
 import {
+  PaymentQueryParams,
   TransferoBrazilBankTransferRequest,
   TransferoCryptoPaymentRequest,
   TransferoPixTransferRequest,
@@ -89,6 +90,28 @@ describe('PayoutAPI', () => {
       expect(mockAxiosGet).toHaveBeenCalledWith(
         `/accounts/${accountId}/paymentgroup/${paymentGroupId}`,
         { params: expectedParams },
+      );
+      expect(result).toEqual(responseData);
+    });
+  });
+
+  describe('listPayments', () => {
+    it('should make a GET request to /accounts/{accountId}/payments with the correct parameters', async () => {
+      const queryParams: PaymentQueryParams = {
+        paymentId: 'your-payment-id',
+        externalId: 'your-external-id',
+        pageNumber: 1,
+        pageSize: 10,
+      };
+      const responseData = paymentGroupResponse;
+      mock
+        .onGet(`/accounts/${accountId}/payments`, { params: queryParams })
+        .reply(200, responseData);
+      const mockAxiosGet = jest.spyOn(apiClient, 'get');
+      const result = await payoutAPI.listPayments(queryParams);
+      expect(mockAxiosGet).toHaveBeenCalledWith(
+        `/accounts/${accountId}/payments`,
+        { params: queryParams },
       );
       expect(result).toEqual(responseData);
     });

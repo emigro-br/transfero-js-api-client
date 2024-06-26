@@ -3,6 +3,7 @@ import {
   TransferoPaymentRequest,
   TransferoPaymentGroupResponse,
   TransferoPaymentPreview,
+  PaymentQueryParams,
 } from './types';
 
 export class PayoutAPI {
@@ -45,6 +46,17 @@ export class PayoutAPI {
     const response = await this.apiClient.get(
       `/accounts/${this.accountId}/paymentgroup/${paymentGroupId}`,
       { params },
+    );
+    return response.data;
+  }
+
+  // GET https://openbanking.bit.one/api/v{version}/accounts/{accountId}/payments[?paymentId][&externalId][&pageNumber][&pageSize]
+  async listPayments(
+    queryParams: PaymentQueryParams,
+  ): Promise<TransferoPaymentGroupResponse> {
+    const response = await this.apiClient.get(
+      `/accounts/${this.accountId}/payments`,
+      { params: queryParams },
     );
     return response.data;
   }

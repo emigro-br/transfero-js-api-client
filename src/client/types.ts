@@ -1,5 +1,5 @@
 // BRL, ARS, XLM, ETH, BTC etc
-type TransferoCurrency = 'BRL' | 'ARS' | 'XLM' | 'ETH' | 'BTC';
+// type TransferoCurrency = 'BRL' | 'ARS' | 'XLM' | 'ETH' | 'BTC';
 
 /*
 taxIdCountry
@@ -44,7 +44,7 @@ export type TransferoPaymentPreview = {
 type TransferoPaymentRequestBase = {
   amount: number;
   externalId?: string;
-  currency: TransferoCurrency;
+  currency: string; // BRL, ARS, XLM, ETH, BTC etc
   name: string;
   taxIdCountry: TransferoTaxIdCountry;
   taxId: string;
@@ -117,6 +117,13 @@ export type TransferoPaymentGroupResponse = {
   numberOfPaymentsCompletedWithError: number;
   createdAt: string;
   payments: TransferoPaymentResponse[];
+};
+
+export type PaymentQueryParams = {
+  paymentId?: string;
+  externalId?: string;
+  pageNumber?: number;
+  pageSize?: number;
 };
 
 /*
