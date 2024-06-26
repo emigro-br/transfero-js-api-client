@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { AuthAPI } from '../client/auth';
+import { AuthAPI, authUrl } from '../client/auth';
 
 describe('AuthAPI', () => {
   let apiClient: AxiosInstance;
@@ -18,23 +18,27 @@ describe('AuthAPI', () => {
     it('should make a POST request to /auth/token with the correct data and headers', async () => {
       const clientId = 'your-client-id';
       const clientSecret = 'your-client-secret';
+      const clientScope = 'your-client-scope';
 
       const expectedData =
-        'clientId=your-client-id&clientSecret=your-client-secret';
+        'grant_type=client_credentials&scope=your-client-scope&client_id=your-client-id&client_secret=your-client-secret';
       const expectedConfig = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       };
 
-      const responseData = { accessToken: 'your-access-token' };
-      mock.onPost('/auth/token').reply(200, responseData);
+      const responseData = {
+        token_type: 'Bearer',
+        access_token: 'your-access-token',
+      };
+      mock.onPost(authUrl).reply(200, responseData);
 
       const mockAxiosPost = jest.spyOn(apiClient, 'post');
-      const result = await authAPI.token(clientId, clientSecret);
+      const result = await authAPI.token(clientId, clientSecret, clientScope);
 
       expect(mockAxiosPost).toHaveBeenCalledWith(
-        '/auth/token',
+        authUrl,
         expectedData,
         expectedConfig,
       );
