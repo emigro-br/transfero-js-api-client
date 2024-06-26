@@ -4,6 +4,7 @@ import { PaymentsAPI } from '../client/payments';
 
 import paymentPreviewResponse from '@/mocks/payments/paymentpreview.response.json';
 import paymentGroupResponse from '@/mocks/payments/paymentgroup.response.json';
+import paymentsResponse from '@/mocks/payments/payments.response.json';
 import pixPayoutJson from '@/mocks/payments/payout.brazil-pix.json';
 import bankPayoutJson from '@/mocks/payments/payout.brazil-bank.json';
 import cryptoPayoutJson from '@/mocks/payments/payout.crypto.json';
@@ -12,9 +13,12 @@ import {
   TransferoBrazilBankTransferRequest,
   TransferoCryptoPaymentRequest,
   TransferoPixTransferRequest,
+  TransferoPaymentResponse,
+  TransferoPaymentGroupResponse,
+  TransferoPaymentPreview,
 } from '@/client/types';
 
-describe('PayoutAPI', () => {
+describe('PaymentsAPI', () => {
   let apiClient: AxiosInstance;
   let paymentsApi: PaymentsAPI;
   let mock: any;
@@ -34,7 +38,7 @@ describe('PayoutAPI', () => {
     it('should make a POST request to /accounts/{accountId}/paymentpreview with the correct data', async () => {
       const brcode = 'your-brcode';
       const expectedData = { id: brcode };
-      const responseData = paymentPreviewResponse;
+      const responseData = paymentPreviewResponse as TransferoPaymentPreview;
       mock
         .onPost(`/accounts/${accountId}/paymentpreview`)
         .reply(200, responseData);
@@ -53,7 +57,8 @@ describe('PayoutAPI', () => {
   describe('createPaymentGroup', () => {
     it('should make a POST request to /accounts/{accountId}/paymentgroup with the correct data', async () => {
       const data = [pixPayout, bankPayout, cryptoPayout];
-      const responseData = paymentGroupResponse;
+      const responseData =
+        paymentGroupResponse as TransferoPaymentGroupResponse;
       mock
         .onPost(`/accounts/${accountId}/paymentgroup`)
         .reply(200, responseData);
@@ -75,7 +80,8 @@ describe('PayoutAPI', () => {
       const paymentId = 'your-payment-id';
       const externalId = 'your-external-id';
       const expectedParams = { paymentId, externalId };
-      const responseData = paymentGroupResponse;
+      const responseData =
+        paymentGroupResponse as TransferoPaymentGroupResponse;
       mock
         .onGet(`/accounts/${accountId}/paymentgroup/${paymentGroupId}`)
         .reply(200, responseData);
@@ -103,7 +109,7 @@ describe('PayoutAPI', () => {
         pageNumber: 1,
         pageSize: 10,
       };
-      const responseData = paymentGroupResponse;
+      const responseData = paymentsResponse as TransferoPaymentResponse[];
       mock
         .onGet(`/accounts/${accountId}/payments`, { params: queryParams })
         .reply(200, responseData);

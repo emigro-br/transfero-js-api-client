@@ -4,6 +4,7 @@ import {
   TransferoPaymentGroupResponse,
   TransferoPaymentPreview,
   PaymentQueryParams,
+  TransferoPaymentResponse,
 } from './types';
 
 export class PaymentsAPI {
@@ -53,7 +54,7 @@ export class PaymentsAPI {
   // GET https://openbanking.bit.one/api/v{version}/accounts/{accountId}/payments[?paymentId][&externalId][&pageNumber][&pageSize]
   async listPayments(
     queryParams: PaymentQueryParams,
-  ): Promise<TransferoPaymentGroupResponse> {
+  ): Promise<TransferoPaymentResponse[]> {
     const response = await this.apiClient.get(
       `/accounts/${this.accountId}/payments`,
       { params: queryParams },
