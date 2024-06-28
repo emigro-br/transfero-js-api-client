@@ -43,7 +43,7 @@ export type TransferoPaymentPreview = {
 // Payout
 type TransferoPaymentRequestBase = {
   amount: number;
-  externalId?: string;
+  externalId?: string | null;
   currency: string; // BRL, ARS, XLM, ETH, BTC etc
   name: string;
   taxIdCountry: TransferoTaxIdCountry;
@@ -57,7 +57,7 @@ export type TransferoPixTransferRequest = TransferoPaymentRequestBase & {
 
 // Brazil - pyament using a Pix brcode
 export type TransferoBrCodePaymentRequest = TransferoPaymentRequestBase & {
-  QrCode: string;
+  qrCode: string;
 };
 
 // Brazil - transfer using account info

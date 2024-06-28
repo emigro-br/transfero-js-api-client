@@ -1,0 +1,21 @@
+{
+    "paymentId": "508062e1-2d5a-474b-b71c-b74ebe92e046",
+    "amount": 13.03,
+    "amountNet": 13.03,
+    "amountDeductedFromAccount": 13.03,
+    "externalId": null,
+    "currency": "BRL",
+    "name": "Fulano 2",
+    "taxId": "32611536000130",
+    "taxIdCountry": 76,
+    "bankAccount": null,
+    "bankBranch": null,
+    "bankCode": null,
+    "pixKey": null,
+    "barCode": null,
+    "qrCode": "00020101021226890014br.gov.bcb.pix2567brcode-h.sandbox.starkinfra.com/v2/46c9d42b655647a19d64e09a512d0aad5204000053039865802BR59253Rz Servicos Digitais Ltd6014Rio de Janeiro62070503***630473A8",
+    "paymentStatus": "Pending",
+    "transactionId": null,
+    "transactionIdFromPaymentReversal": null,
+    "reasonsForPaymentRejection": null
+}

@@ -5,7 +5,9 @@ import { PaymentsAPI } from '../client/payments';
 import paymentPreviewResponse from '@/mocks/payments/paymentpreview.response.json';
 import paymentGroupResponse from '@/mocks/payments/paymentgroup.response.json';
 import paymentsResponse from '@/mocks/payments/payments.response.json';
+import pixQrCodeResponse from '@/mocks/payments/pix.qrcode.response.json';
 import pixPayoutJson from '@/mocks/payments/payout.brazil-pix.json';
+import pixQrCodeJson from '@/mocks/payments/pix.qrcode.json';
 import bankPayoutJson from '@/mocks/payments/payout.brazil-bank.json';
 import cryptoPayoutJson from '@/mocks/payments/payout.crypto.json';
 import {
@@ -16,6 +18,8 @@ import {
   TransferoPaymentResponse,
   TransferoPaymentGroupResponse,
   TransferoPaymentPreview,
+  TransferoBrCodePaymentRequest,
+  TransferoBrCodePaymentResponse,
 } from '@/client/types';
 
 describe('PaymentsAPI', () => {
@@ -26,6 +30,7 @@ describe('PaymentsAPI', () => {
   const pixPayout = pixPayoutJson as TransferoPixTransferRequest;
   const bankPayout = bankPayoutJson as TransferoBrazilBankTransferRequest;
   const cryptoPayout = cryptoPayoutJson as TransferoCryptoPaymentRequest;
+  const pixQrCode = pixQrCodeJson as TransferoBrCodePaymentRequest;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -59,6 +64,30 @@ describe('PaymentsAPI', () => {
       const data = [pixPayout, bankPayout, cryptoPayout];
       const responseData =
         paymentGroupResponse as TransferoPaymentGroupResponse;
+      mock
+        .onPost(`/accounts/${accountId}/paymentgroup`)
+        .reply(200, responseData);
+
+      const mockAxiosPost = jest.spyOn(apiClient, 'post');
+      const result = await paymentsApi.createPaymentGroup(data);
+
+      expect(mockAxiosPost).toHaveBeenCalledWith(
+        `/accounts/${accountId}/paymentgroup`,
+        data,
+      );
+      expect(result).toEqual(responseData);
+    });
+
+    it('should make a POST request to /accounts/{accountId}/paymentgroup with pix qrCode', async () => {
+      const data = [pixQrCode];
+      const defaultResponseData =
+        paymentGroupResponse as TransferoPaymentGroupResponse;
+
+      const responseData = {
+        ...defaultResponseData,
+        payments: [pixQrCodeResponse as TransferoBrCodePaymentResponse],
+      };
+
       mock
         .onPost(`/accounts/${accountId}/paymentgroup`)
         .reply(200, responseData);
