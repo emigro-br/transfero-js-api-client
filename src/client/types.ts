@@ -137,3 +137,21 @@ export type TransferoPaymentStatus =
   | 'Processing'
   | 'CompletedWithError'
   | 'CompletedWithSuccess';
+
+// Quote
+
+export type TransferoQuoteRequest = {
+  baseCurrency: string;
+  quoteCurrency: string;
+  baseCurrencySize: number;
+  quoteCurrencySize: number;
+  side: string; // 'Buy' | 'Sell';
+  taxId?: string;
+  taxIdCountry?: string;
+};
+
+export type TransferoQuoteResponse = {
+  quoteId: string;
+  price: number;
+  expireAt: string;
+};

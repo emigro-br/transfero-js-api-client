@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 
 import { AuthAPI } from './auth';
 import { PaymentsAPI } from './payments';
+import { QuoteAPI } from './quote';
 
 export type TransferoConfig = {
   clientId: string;
@@ -90,8 +91,16 @@ export class TransferoClient {
   }
 
   payments(accountId: string): PaymentsAPI {
+    // eg: /api/v2
     const paymentsBaseURL = `${this.apiBaseURL}/${this.version}`;
     const apiClient = this.createApiClient(paymentsBaseURL);
     return new PaymentsAPI(apiClient, accountId);
+  }
+
+  quote(): QuoteAPI {
+    // the version is after the /api/quote, eg: /api/quote/v2
+    const quoteBaseURL = `${this.apiBaseURL}/quote/${this.version}`;
+    const apiClient = this.createApiClient(quoteBaseURL);
+    return new QuoteAPI(apiClient);
   }
 }

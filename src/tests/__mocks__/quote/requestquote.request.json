@@ -1,0 +1,7 @@
+{
+    "baseCurrency": "BTC",
+    "quoteCurrency": "BRL",
+    "baseCurrencySize": 0.0001,
+    "quoteCurrencySize": 0,
+    "side": "Buy"
+}
