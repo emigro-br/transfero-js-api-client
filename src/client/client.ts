@@ -10,13 +10,16 @@ export type TransferoConfig = {
   environment?: 'production' | 'sandbox';
 };
 
+const productionBaseURL = 'https://openbanking.bit.one';
+const sandboxBaseURL = 'https://staging-openbanking.bit.one';
+
 export class TransferoClient {
   private version = 'v2';
-  private auth: AuthAPI;
-  private apiClient: AxiosInstance;
+  private apiBaseURL: string;
   private clientId: string;
   private clientSecret: string;
   private clientScope: string;
+  private _auth?: AuthAPI;
   private token: string | null = null;
   private tokenExpiry: Date | null = null;
 
@@ -27,24 +30,23 @@ export class TransferoClient {
     environment = 'sandbox',
   }: TransferoConfig) {
     const baseURL =
-      environment === 'production'
-        ? 'https://openbanking.bit.one/api'
-        : 'https://staging-openbanking.bit.one/api';
-
-    const apiClient = axios.create({ baseURL: `${baseURL}/${this.version}` });
+      environment === 'production' ? productionBaseURL : sandboxBaseURL;
+    this.apiBaseURL = `${baseURL}/api`;
 
     this.clientId = clientId;
     this.clientSecret = clientSecret;
     this.clientScope = clientScope;
+  }
 
-    this.auth = new AuthAPI(apiClient);
+  /**
+   * Creates an instance of the API client with a token interceptor.
+   * @param baseURL The base URL for the API client.
+   * @returns An instance of the Axios client.
+   */
+  private createApiClient(baseURL: string): AxiosInstance {
+    const apiClient = axios.create({ baseURL });
 
-    apiClient.interceptors.request.use(async (config) => {
-      // Check if the current request is for the token endpoint and skip the token check
-      if (config.url?.endsWith('/auth/token')) {
-        return config;
-      }
-
+    apiClient.interceptors.request.use(async (config: any) => {
       await this.ensureValidToken();
       if (this.token) {
         // Ensure the token is correctly prefixed with 'Bearer '
@@ -55,7 +57,7 @@ export class TransferoClient {
       }
       return config;
     });
-    this.apiClient = apiClient;
+    return apiClient;
   }
 
   private async ensureValidToken(): Promise<void> {
@@ -64,7 +66,7 @@ export class TransferoClient {
     const isTokenValid =
       this.token && this.tokenExpiry && now < this.tokenExpiry;
     if (!isTokenValid) {
-      const response = await this.auth.token(
+      const response = await this.auth().token(
         this.clientId,
         this.clientSecret,
         this.clientScope,
@@ -75,7 +77,21 @@ export class TransferoClient {
     }
   }
 
+  auth(): AuthAPI {
+    // cache it to avoid creating multiple instances
+    if (!this._auth) {
+      // baseURL is the same for both sandbox and production
+      const authBaseURL = `${productionBaseURL}/auth`;
+      // Create an instance of the API client without a token interceptor
+      const apiClient = axios.create({ baseURL: authBaseURL });
+      this._auth = new AuthAPI(apiClient);
+    }
+    return this._auth;
+  }
+
   payments(accountId: string): PaymentsAPI {
-    return new PaymentsAPI(this.apiClient, accountId);
+    const paymentsBaseURL = `${this.apiBaseURL}/${this.version}`;
+    const apiClient = this.createApiClient(paymentsBaseURL);
+    return new PaymentsAPI(apiClient, accountId);
   }
 }

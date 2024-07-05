@@ -2,9 +2,6 @@ import { AxiosInstance } from 'axios';
 import qs from 'qs';
 import { TransferoAuthResponse } from './types';
 
-// is the same for both sandbox and production
-export const authUrl = 'https://openbanking.bit.one/auth/token';
-
 export class AuthAPI {
   constructor(private apiClient: AxiosInstance) {}
 
@@ -26,7 +23,7 @@ export class AuthAPI {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     };
-    const response = await this.apiClient.post(authUrl, data, config);
+    const response = await this.apiClient.post('/token', data, config);
     return response.data;
   }
 }

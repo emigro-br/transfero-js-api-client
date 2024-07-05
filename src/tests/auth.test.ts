@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { AuthAPI, authUrl } from '../client/auth';
+import { AuthAPI } from '../client/auth';
 
 import authJson from '@/mocks/auth/token.response.json';
 
@@ -11,7 +11,7 @@ describe('AuthAPI', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    apiClient = axios.create();
+    apiClient = axios.create({ baseURL: '/auth' });
     authAPI = new AuthAPI(apiClient);
     mock = new MockAdapter(apiClient, { onNoMatch: 'throwException' });
   });
@@ -31,13 +31,13 @@ describe('AuthAPI', () => {
       };
 
       const responseData = authJson;
-      mock.onPost(authUrl).reply(200, responseData);
+      mock.onPost('/auth/token').reply(200, responseData);
 
       const mockAxiosPost = jest.spyOn(apiClient, 'post');
       const result = await authAPI.token(clientId, clientSecret, clientScope);
 
       expect(mockAxiosPost).toHaveBeenCalledWith(
-        authUrl,
+        '/token',
         expectedData,
         expectedConfig,
       );
