@@ -155,3 +155,26 @@ export type TransferoQuoteResponse = {
   price: number;
   expireAt: string;
 };
+
+// Trade
+export type TransferoTradeRequest = {
+  taxId: string;
+  taxIdCountry?: string | null;
+  name: string;
+  quoteId: string;
+};
+
+export type TransferoTradeResponse = {
+  id: string;
+  success: boolean;
+  timeStamp: string;
+  side: number;
+  baseTicker: string;
+  quoteTicker: string;
+  baseCurrencySize: number;
+  quoteCurrencySize: number;
+  price: number;
+  taxId: string;
+  taxIdCountry: string; // TODO: check why "BRA" and not 76
+  quoteId: string;
+};

@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from 'axios';
 import { AuthAPI } from './auth';
 import { PaymentsAPI } from './payments';
 import { QuoteAPI } from './quote';
+import { TradeAPI } from './trade';
 
 export type TransferoConfig = {
   clientId: string;
@@ -102,5 +103,12 @@ export class TransferoClient {
     const quoteBaseURL = `${this.apiBaseURL}/quote/${this.version}`;
     const apiClient = this.createApiClient(quoteBaseURL);
     return new QuoteAPI(apiClient);
+  }
+
+  trade(): TradeAPI {
+    // the version is after the /api/trade, eg: /api/trade/v2
+    const tradeBaseURL = `${this.apiBaseURL}/trade/${this.version}`;
+    const apiClient = this.createApiClient(tradeBaseURL);
+    return new TradeAPI(apiClient);
   }
 }

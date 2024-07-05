@@ -1,0 +1,28 @@
+{
+    "id": "7db72e92-10b1-4f9a-b0f4-edb4dac021a7",
+    "success": true,
+    "timeStamp": "2024-07-05T19:02:10.5426149+00:00",
+    "side": 1,
+    "baseTicker": "USDC",
+    "quoteTicker": "BRZ",
+    "baseCurrencySize": 1,
+    "quoteCurrencySize": 0,
+    "price": 5.4980,
+    "taxId": "32611536000130",
+    "taxIdCountry": "BRA",
+    "quoteId": "21e6d0da-f904-41c1-9736-0c7d00b0a36b",
+    "links": [
+        {
+            "id": "97b49884-d7f9-4c6e-a565-330e42b8ad09",
+            "documentType": "Transaction"
+        },
+        {
+            "id": "ad025b08-fdf7-4955-922e-ab62a6cb5c43",
+            "documentType": "Transaction"
+        },
+        {
+            "id": "21e6d0da-f904-41c1-9736-0c7d00b0a36b",
+            "documentType": "Quote"
+        }
+    ]
+}
